@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlantaController;
+use App\Http\Controllers\MapaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::resource('plantas', PlantaController::class);
+
+Route::resource('mapas', MapaController::class);

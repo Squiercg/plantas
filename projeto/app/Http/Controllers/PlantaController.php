@@ -97,12 +97,13 @@ class PlantaController extends Controller
             'descricao' => 'required',
             'latitude' => 'required|numeric|between:-33.7525,5.251389,',
             'longitude' => 'required|numeric|between:-73.984444,-34.88,'
-        ]);        
-      
+        ]); 
+        
+        $nome = $planta->getAttributes()['nome'];      
         $planta->update($request->all());
        
         return redirect()->route('plantas.index')
-                        ->with('success','Planta alterada.');
+                        ->with('success','Planta '.$nome.' foi alterada.');
     }
 
     /**
