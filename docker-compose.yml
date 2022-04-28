@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  bancoDeDados:
+    container_name: bancoDeDados
+    image: bitnami/postgresql:latest
+    ports:
+      - '5433:5432'
+    volumes:
+      - './postgresql_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_USERNAME=desenvolvedor
+      - POSTGRESQL_PASSWORD=desenvolvedor123
+      - POSTGRESQL_DATABASE=banco
+    networks:
+      - rede-teste
+      
+  aplicacao:
+    container_name: servidorLaravel
+    image: docker.io/bitnami/laravel:9
+    ports:
+      - '8087:8000'    
+    volumes:
+      - './php.ini:/opt/bitnami/php/lib/php.ini'
+      - './projeto:/app'
+    depends_on:
+      - bancoDeDados    
+    networks:
+      - rede-teste
+    
+      
+networks:
+  rede-teste:
+    driver: bridge
